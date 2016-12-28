@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('update_part') }}" method=post class=add-item>
+      <dl>
+        <dt>Part Name:
+        <dd><input type=text style='width:92%' name=pcPart_name value="{{ selected_row.pcPart_name }}">
+        <dt>Part Type:
+        <dd><select name=pcPart_type value="{{ selected_row.pcPart_type }}">
+                <option value="cpu">Processor</option>
+                <option value="ram">Memory</option>
+                <option value="mobo">Motherboard</option>
+                <option value="ssd">Solid State Drive</option>
+                <option value="hdd">Hard Disk Drive</option>
+                <option value="case">Case</option>
+                <option value="gpu">Video Card</option>
+                <option value="psu">Power Supply</option>
+                <option value="os">Operating System</option>
+                <option value="cpuCool">CPU Cooler</option>
+                <option value="fan">Fan</option>
+                <option value="ledkit">LED Kit</option>
+                <option value="misc">Miscellaneous</option>
+            </select>
+        <dt>Part Model Number:
+        <dd><input type=text size=30 name=pcPart_modelNumber value="{{ selected_row.pcPart_modelNumber }}">
+        <dt>Part Price:
+        <dd><input type=text size=7 name=pcPart_price value="{{ selected_row.pcPart_price }}"> Dollars
+        <dt>Part Description:
+        <dd><textarea name=pcPart_desc style='width:50%' rows=8>{{ selected_row.pcPart_desc }}</textarea>
+        <dt>Part Brand:
+        <dd><input type=text size=30 name=pcPart_brand value="{{ selected_row.pcPart_brand }}">
+        <dt>Part Condition:
+        <dd><textarea name=pcPart_condition style='width:50%' rows=8>{{ selected_row.pcPart_condition }}</textarea>
+        <dt>Part Notes:
+        <dd><textarea name=pcPart_notes style='width:50%' rows=8>{{ selected_row.pcPart_notes }}</textarea>
+        <dt>Part TEST:
+        <dd><input type=text size=30 name=pcPart_test value="{{ selected_row.pcPart_test }}">
+        <dt>Part Age:
+        <dd><input type=number step=any min=0 size=3 name=pcPart_age value="{{ selected_row.pcPart_age }}"> Years
+        <input type=hidden name=pcPart_id value="{{ selected_row.pcPart_id }}"></input>
+        <dt>Update Part:
+        <dd><input type=submit value=Update>
+      </dl>
+    </form>
+  {% endif %}
+{% endblock %}

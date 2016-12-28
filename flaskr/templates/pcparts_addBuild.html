@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_build') }}" method=post class=add-item>
+      <dl>
+        <dt>Build Name:
+        <dd><input type=text style='width:92%' name=pcBuild_name placeholder="Thermaltake_Black_i5">
+        <dt>Build Type:
+        <dd><input type=text size=30 name=pcBuild_type placeholder="Gaming">
+        <dt>Select Motherboard:
+        <dd><select name=pcBuild_mobo_id >
+                {% for part in moboList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Case:
+        <dd><select name=pcBuild_case_id >
+                {% for part in caseList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select PSU:
+        <dd><select name=pcBuild_psu_id >
+                {% for part in psuList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select RAM:
+        <dd><select name=pcBuild_ram_id >
+                {% for part in ramList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Video Card:
+        <dd><select name=pcBuild_gpu_id >
+                {% for part in gpuList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Solid State Drive:
+        <dd><select name=pcBuild_ssd_id >
+                {% for part in ssdList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Hard Disk Drive:
+        <dd><select name=pcBuild_hdd_id >
+                {% for part in hddList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Processor:
+        <dd><select name=pcBuild_cpu_id >
+                {% for part in cpuList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select CPU Cooler:
+        <dd><select name=pcBuild_cpuCool_id >
+                {% for part in cpuCoolList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Hard Disk Drive:
+        <dd><select name=pcBuild_fan_id >
+                {% for part in fanList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select LED Kit:
+        <dd><select name=pcBuild_ledkit_id >
+                {% for part in ledkitList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>Select Operating System:
+        <dd><select name=pcBuild_os_id >
+                {% for part in osList %}
+                        <option value="{{ part.pcPart_id }}">{{ part.pcPart_name }} , {{ part.pcPart_modelNumber }} , {{ part.pcPart_price }} </option>
+                {% endfor %}
+            </select>
+        <dt>PC Build Notes:
+        <dd><textarea name=pcPart_desc style='width:50%' rows=8></textarea>
+        <dt>Average Part Age:
+        <dd><input type=number size=7 name=pcBuild_avgPartAge placeholder="2"> Years
+        <dt>Color Scheme:
+        <dd><input type=text size=15 name=pcBuild_colorScheme placeholder="Red and Black">
+        <dt>Add Part:
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_part') }}" method=post class=add-item>
+      <dl>
+        <dt>Part Name:
+        <dd><input type=text style='width:92%' name=pcPart_name>
+        <dt>Part Type:
+        <dd><select name=pcPart_type >
+                <option value="cpu">Processor</option>
+                <option value="ram">Memory</option>
+                <option value="mobo">Motherboard</option>
+                <option value="ssd">Solid State Drive</option>
+                <option value="hdd">Hard Disk Drive</option>
+                <option value="case">Case</option>
+                <option value="gpu">Video Card</option>
+                <option value="psu">Power Supply</option>
+                <option value="os">Operating System</option>
+                <option value="cpuCool">CPU Cooler</option>
+                <option value="fan">Fan</option>
+                <option value="ledkit">LED Kit</option>
+                <option value="misc">Miscellaneous</option>
+            </select>
+        <dt>Part Model Number:
+        <dd><input type=text size=30 name=pcPart_modelNumber>
+        <dt>Part Price: <input type=text size=7 name=pcPart_price> Dollars
+        <dd>
+        <dt>Part Description:
+        <dd><textarea name=pcPart_desc style='width:50%' rows=8></textarea>
+        <dt>Part Brand: <input type=text size=30 name=pcPart_brand>
+        <dd>
+        <dt>Part Condition:
+        <dd><textarea name=pcPart_condition style='width:50%' rows=8></textarea>
+        <dt>Part Notes:
+        <dd><textarea name=pcPart_notes style='width:50%' rows=8></textarea>
+        <dt>Part TEST:
+        <dd><input type=text size=30 name=pcPart_test>
+        <dt>Part Age:
+        <dd><input type=number step=any min=0 size=3 name=pcPart_age> Years
+        <dt>Add Part:
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+  {% endif %}
+{% endblock %}

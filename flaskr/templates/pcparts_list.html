@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=items>
+  {% for item in items %}
+    <li>
+        <h2>Part Name: <a href="{{ url_for('part_details', pcPartId=item.pcPart_id) }}">{{ item.pcPart_name }}</a></h2>
+        <dl>
+                <dt><b>Part Type:</b> {{ item.pcPart_type|safe }}
+                <dt><b>Part Model Number:</b> {{ item.pcPart_modelNumber }}
+                <dt><b>Part Price:</b> ${{ item.pcPart_price }}
+                <dt><b>Part Description:</b>
+                <dd>{{ item.pcPart_desc }}
+                <dt><b>Part Brand:</b> {{ item.pcPart_brand }}
+                <dt><b>Part Condition:</b>
+                <dd>{{ item.pcPart_condition }}
+                <dt><b>Part Notes:</b>
+                <dd>{{ item.pcPart_notes }}
+                <dt><b>Part Age:</b> {{ item.pcPart_age }} years
+                <dd>
+        </dl>
+        <form action="{{ url_for('delete_part') }}" method=post class=add-item>
+                <input type=hidden name=part_to_delete value="{{ item.pcPart_id }}"></input>
+                <input type=submit value="Delete"></input>
+        </form>
+        <form action="{{ url_for('display_update_part') }}" method=post class=add-item>
+                <input type=hidden name=part_to_update value="{{ item.pcPart_id }}"></input>
+                <input type=submit value="Edit"></input>
+        </form>
+  {% else %}
+    <li>
+        <em>No Items Found!</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('submit_item') }}" enctype=multipart/form-data method=post class=add-item>
+      <dl>
+        <dt>Item Name:
+        <dd><input type=text style='width:92%' name=item_name>
+        <dt>Item Subtitle:
+        <dd><input type=text style='width:92%' name=item_subtitle>
+        <dt>Item Description:
+        <dd><textarea name=item_desc rows=8 style='width:92%'></textarea>
+        <!-- <dd><textarea name=item_desc rows=8 cols=80></textarea> -->
+        <dt>Item Category:
+        <dd><input type=text size=60 name=item_category>
+        <dt>Item Condition:
+        <dd><select name=item_condition >
+                <option value="used">Used</option>
+                <option value="new">New</option>
+                <option value="newOther">New (other)</option>
+                <option value="manuRefurb">Manufacturer Refurbished</option>
+                <option value="forParts">For Parts or Not Working</option>
+                <option value="sellerRefurb">Seller Refurbished</option>
+            </select>
+        <dt>Item Condition Description:
+        <dd><textarea name=item_conditionDesc style='width:50%' cols=40></textarea>
+        <dt>Item Cost:
+        <dd><input type=text size=7 name=item_cost>
+        <dt>Item Pictures:
+        <dd><input type=file name=item_pictures multiple>
+        <dt>Add Item:
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=items>
+  {% for item in items %}
+    <li><h2>{{ item.item_name }}</h2>{{ item.item_subtitle|safe }}
+    {{ item.item_desc|safe }}
+    {{ item.item_category|safe }}
+    {{ item.item_condition|safe }}
+    {{ item.item_conditionDesc|safe }}
+    {{ item.item_cost|safe }}
+  {% else %}
+    <li><em>No Items Found!</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=items>
+  {% for item in items %}
+    <li>
+        <h2>{{ item.item_name }}</h2>
+        {{ item.item_subtitle|safe }}
+        {{ item.item_desc }}
+        {{ item.item_category|safe }}
+        {{ item.item_condition|safe }}
+        {{ item.item_conditionDesc|safe }}
+        {{ item.item_cost|safe }}
+  {% else %}
+    <li>
+        <em>No Items Found!</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

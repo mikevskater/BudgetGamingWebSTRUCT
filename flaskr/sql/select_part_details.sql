@@ -1,0 +1,1 @@
+SELECT * FROM ssd WHERE ssd_pcPart_id = ?

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+        <ul class=items>
+                <li><h2>Dashboard</h2>
+                <li><b>Landing Page</b>
+                <li><em>Welcome to the dashboard!</em>
+                </br>
+                </br>
+                <li><em>Parts Inventory</em>
+                </br>
+                <a href="{{ url_for('pcparts_addPart') }}">Add A Part</a>
+                </br>
+                <a href="{{ url_for('pcparts_list') }}">See Full List of Parts</a>
+                <a href="{{ url_for('pcparts_listBuilds') }}">See Full List of Builds</a>
+                </br>
+                </br>
+                </br>
+                </br>
+                <a href="{{ url_for('pcparts_ram') }}">RAM</a>
+                </br>
+                <a href="{{ url_for('list_pcparts_ssd') }}">Solid State Drives</a>
+                </br>
+                <a href="{{ url_for('pcparts_hdd') }}">Hard Disk Drives</a>
+                </br>
+                <a href="{{ url_for('pcparts_case') }}">Cases</a>
+                </br>
+                <a href="{{ url_for('pcparts_gpu') }}">Video Cards</a>
+                </br>
+                <a href="{{ url_for('pcparts_psu') }}">Power Supplies</a>
+                </br>
+                <a href="{{ url_for('pcparts_os') }}">Operating Systems</a>
+                </br>
+                <a href="{{ url_for('pcparts_cpuCool') }}">CPU Cooling</a>
+                </br>
+                <a href="{{ url_for('pcparts_mobo') }}">Motherboards</a>
+                </br>
+                <a href="{{ url_for('pcparts_fan') }}">Fans</a>
+                </br>
+                <a href="{{ url_for('pcparts_ledkit') }}">LED Kits</a>
+                </br>
+                <a href="{{ url_for('pcparts_cpu') }}">Processors</a>
+        </ul>
+{% endblock %}

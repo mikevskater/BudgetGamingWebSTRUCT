@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+        <ul class=items>
+        <li><h2>PC Parts - Solid State Drives</h2>
+        <li><b>List of Solid State Drives</b>
+        <li><b>PC PART ID: {{ pcPartId }}</b>
+        <br /> <b>Form Factor:</b>
+        {{ selected_row.ssd_formFactor }}
+        <br /> <b>Storage Capacity:</b>
+        {{ selected_row.ssd_size|safe }} MB
+        <br /> <b>Interface:</b>
+        {{ selected_row.ssd_interface }}
+        {% if session.logged_in %}
+                <form action="{{ url_for('display_update_part_details', pcPartId = selected_row.ssd_pcPart_id)}}" enctype=multipart/form-data method=post class=add-item>
+                        <dt>Edit Part:
+                        <dd><input type=submit value=Edit>
+                        </dl>
+                </form>
+        {% endif %}
+        </ul>
+{% endblock %}

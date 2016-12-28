@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=items>
+    <li><h2>PC Parts - Add Part - SSD</h2>
+    <li><b>Add Solid State Specifics</b>
+    </br>
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_ssd') }}" enctype=multipart/form-data method=post class=add-item>
+      <dl>
+        <dt>Form Factor:
+        <dd><input type=text size=25 name=ssd_formFactor>
+        <dt>Storage Capacity:
+        <dd><input type=text size=7 name=ssd_size> MB
+        <dt>Interface:
+        <dd><input type=text size=25 name=ssd_interface>
+        <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+        <dt>Add Part:
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=items>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=items>
+  {% for pcBuild in pcBuildList %}
+    <li>
+        <h2>Build Name: <a href="{{ url_for('build_details', pcBuildId=pcBuild.pcBuild_id) }}">{{ pcBuild.pcBuild_name }}</a></h2>
+        <dl>
+                <dt><b>Type:</b> {{ pcBuild.pcBuild_type|safe }}
+                <dt><b>Avg Part Age:</b> {{ pcBuild.pcBuild_avgPartAge }} years
+                <dt><b>Color Scheme:</b> {{ pcBuild.pcBuild_colorScheme }}
+                <dt><b>Notes:</b> 
+                <dd>{{ pcBuild.pcBuild_notes }}
+                <dd>
+        </dl>
+        <form action="{{ url_for('delete_build') }}" method=post class=add-item>
+                <input type=hidden name=build_to_delete value="{{ pcBuild.pcBuild_id }}"></input>
+                <input type=submit value="Delete"></input>
+        </form>
+        <form action="{{ url_for('display_update_build') }}" method=post class=add-item>
+                <input type=hidden name=build_to_update value="{{ pcBuild.pcBuild_id }}"></input>
+                <input type=submit value="Edit"></input>
+        </form>
+  {% else %}
+    <li>
+        <em>No Items Found!</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

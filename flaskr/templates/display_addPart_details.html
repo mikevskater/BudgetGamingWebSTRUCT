@@ -1,0 +1,442 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=items>
+    <li><h2>PC Parts - Add Part - Details</h2>
+    </br>
+        {% if session.logged_in %}
+                <!--    ADD PART - SOLID STATE DRIVE                        -->
+                {% if partType == "ssd" %}
+                        <li><b>Add SSD Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Form Factor:
+                                        <dd><input type=text size=25 name=ssd_formFactor placeholder="2.5 inches">
+                                        <dt>Storage Capacity:
+                                        <dd><input type=text size=7 name=ssd_size placeholder="256"> GB
+                                        <dt>Interface:
+                                        <dd><input type=text size=25 name=ssd_interface placeholder="e.g. SATA3">
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - RAM                        -->
+                {% if partType == "ram" %}
+                        <li><b>Add RAM Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Kit Size:
+                                        <dd><input type=text size=25 name=ram_kitSize placeholder="e.g. 2"> Sticks
+                                        <dt>Stick Size:
+                                        <dd><input type=text size=7 name=ram_stickSize placeholder="e.g. 8"> GB
+                                        <dt>Type:
+                                        <dd><select name=ram_type >
+                                                <option value="simm">SIMM</option>
+                                                <option value="sdram">SDRAM</option>
+                                                <option value="ddr1">DDR1</option>
+                                                <option value="ddr2">DDR2</option>
+                                                <option value="ddr3">DDR3</option>
+                                                <option value="ddr4">DDR4</option>
+                                            </select>
+                                        <dt>CAS Latency:
+                                        <dd><input type=text size=25 name=ram_casLatency placeholder="e.g. 9"> CL>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - HDD                        -->
+                {% if partType == "hdd" %}
+                        <li><b>Add HDD Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Form Factor:
+                                        <dd><input type=text size=25 name=hdd_formFactor placeholder="e.g. 3.5 inch">
+                                        <dt>Size:
+                                        <dd><input type=text size=7 name=hdd_size placeholder="e.g. 2000"> GB
+                                        <dt>Interface:
+                                        <dd><input type=text size=7 name=hdd_interface placeholder="e.g. SATA3">
+                                        <dt>Cache:
+                                        <dd><input type=text size=7 name=hdd_cache placeholder="e.g. 128"> MB
+                                        <dt>RPM:
+                                        <dd><input type=text size=7 name=hdd_rpm placeholder="e.g. 7200">
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - CASE                        -->
+                {% if partType == "case" %}
+                        <li><b>Add Case Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Form Factor: <input type=text size=25 name=case_formFactor placeholder="e.g. ITX, mATX, ATX, eATX">
+                                        <dt>Width: <input type=number size=7 name=case_width placeholder="e.g. 12.5"> Inches
+                                        <dt>Height: <input type=number size=7 name=case_height placeholder="e.g. 16.25"> Inches
+                                        <dt>Length: <input type=number size=7 name=case_length placeholder="e.g. 18.5"> Inches
+                                        <dt>5.25" Bays:<input type=number size=7 name=case_525bay placeholder="e.g. 5">
+                                        <dt>3.5" Bays:<input type=number size=7 name=case_350bay placeholder="e.g. 4">
+                                        <dt>2.5" Bays:<input type=number size=7 name=case_250bay placeholder="e.g. 2">
+                                        <dd>
+                                        <dt>80mm Fan Slots:<input type=number size=7 name=case_80fan placeholder="e.g. 0">
+                                        <dt>120mm Fan Slots:<input type=number size=7 name=case_120fan placeholder="e.g. 4">
+                                        <dt>140mm Fan Slots:<input type=number size=7 name=case_140fan placeholder="e.g. 1">
+                                        <dt>240mm Fan Slots:<input type=number size=7 name=case_240fan placeholder="e.g. 2">
+                                        <dt>Other Fan Slots:<input type=text size=15 name=case_otherFan placeholder="e.g. 2x 100mm">
+                                        <dd>
+                                        <dt>Front Speaker Jack:<input type=number size=7 name=case_fpSpk placeholder="e.g. 1">
+                                        <dt>Front Microphone Jack:<input type=number size=7 name=case_fpMic placeholder="e.g. 1">
+                                        <dt>Front USB 3.0 Slots:<input type=number size=7 name=case_fpUSB3 placeholder="e.g. 2">
+                                        <dt>Front USB 2.0 Slots:<input type=number size=7 name=case_fpUSB2 placeholder="e.g. 2">
+                                        <dd>
+                                        <dt>Case PSU Slots:<input type=number size=7 name=case_psuSlots placeholder="e.g. 1">
+                                        <dt>Watercooler Slots:<input type=text size=15 name=case_waterSlots placeholder="e.g. 1x 240mm, 1x 120mm">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - GPU                        -->
+                {% if partType == "gpu" %}
+                        <li><b>Add Video Card Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>VRAM Type: <input type=text size=7 name=gpu_vramType placeholder="e.g. GDDR5">
+                                        <dt>VRAM Size: <input type=number size=7 name=gpu_vramSize placeholder="e.g. 8192"> MB
+                                        <dt>Slot Width: <input type=number size=7 name=gpu_slotWidth placeholder="e.g. 2"> Slots
+                                        <dt>Interface: <input type=number size=7 name=gpu_interface placeholder="e.g. PCIEx16 3.0"> Inches
+                                        <dt>6-pin Power Connectors::
+                                        <dd><select name=gpu_6pin >
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        <dt>8-pin Power Connectors::
+                                        <dd><select name=gpu_8pin >
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        <dt>Clock Speed:<input type=number size=7 name=gpu_clockSpeed placeholder="e.g. 1766"> MHz
+                                        <dd>
+                                        <dt>Memory Clock Speed:<input type=number size=7 name=gpu_memClockSpeed placeholder="e.g. 4333"> MHz
+                                        <dt>Bus Bandwidth:<input type=number size=7 name=gpu_busBandwidth placeholder="e.g. 512"> bit
+                                        <dt>Crossfire:<input type=checkbox name=gpu_crossfire>
+                                        <dt>SLI:<input type=checkbox name=gpu_sli>
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - PSU                        -->
+                {% if partType == "psu" %}
+                        <li><b>Add Power Supply Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Wattage: <input type=text size=7 name=psu_watt placeholder="e.g. 750"> Watts
+                                        <dt>Efficency:
+                                        <dd><select name=psu_effiency >
+                                                <option value="none">Not Certified</option>
+                                                <option value="plus">80 Plus</option>
+                                                <option value="bronze">80 Plus Bronze</option>
+                                                <option value="silver">80 Plus Silver</option>
+                                                <option value="gold">80 Plus Gold</option>
+                                                <option value="platinum">80 Plus Platinum</option>
+                                                <option value="titanium">80 Plus Titanium</option>
+                                            </select>
+                                        <dt>8-pin Connectors: <input type=number size=7 name=psu_8pin placeholder="e.g. 1">
+                                        <dt>6-pin Connectors: <input type=number size=7 name=psu_6pin placeholder="e.g. 2">
+                                        <dt>4-pin Connectors: <input type=number size=7 name=psu_4pin placeholder="e.g. 1">
+                                        <dt>Molex Connectors: <input type=number size=7 name=psu_molex placeholder="e.g. 4">
+                                        <dt>SATA Connectors: <input type=number size=7 name=psu_sata placeholder="e.g. 4">
+                                        <dt>Floppy Connectors: <input type=number size=7 name=psu_floppy placeholder="e.g. 1">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - OS                        -->
+                {% if partType == "os" %}
+                        <li><b>Add Operating System Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Type: <input type=text size=7 name=os_type placeholder="e.g. Windows 7">
+                                        <dt>Bit:
+                                        <dd><select name=os_bit >
+                                                <option value="32">32</option>
+                                                <option value="64">64</option>
+                                            </select>
+                                        <dt>Version: <input type=text size=7 name=os_version placeholder="e.g. Professional">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - CPU Cooler                        -->
+                {% if partType == "cpuCool" %}
+                        <li><b>Add Processor Cooler Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Type:
+                                        <dd><select name=cpuCool_type >
+                                                <option value="air">Air</option>
+                                                <option value="water">Water</option>
+                                            </select>
+                                        <dt>Socket List: <input type=text size=15 name=cpuCool_socketList placeholder="e.g. LGA1151/2011v3, AM2/3/3+">
+                                        <dt>Fan Count: <input type=number size=7 name=cpuCool_fanCount placeholder="e.g. 4">
+                                        <dt>Fan Size: <input type=number size=7 name=cpuCool_fanSize placeholder="e.g. 120">mm
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - Motherboard                        -->
+                {% if partType == "mobo" %}
+                        <li><b>Add Motherboard Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>RAM Type:
+                                        <dd><select name=mobo_ramType >
+                                                <option value="simm">SIMM</option>
+                                                <option value="sdram">SDRAM</option>
+                                                <option value="ddr1">DDR1</option>
+                                                <option value="ddr2">DDR2</option>
+                                                <option value="ddr3">DDR3</option>
+                                                <option value="ddr4">DDR4</option>
+                                            </select>
+                                        <dt>CPU Socket: <input type=text size=7 name=mobo_CPUsocket placeholder="e.g. LGA2011v3">
+                                        <dt>DIMM Slots: <input type=number size=7 name=mobo_dimmSlots placeholder="e.g. 4">
+                                        <dt>PCI Slots: <input type=number size=7 name=mobo_pciSlots placeholder="e.g. 2">
+                                        <dt>PCIEx16 Slots: <input type=number size=7 name=mobo_pcie16Slots placeholder="e.g. 2">
+                                        <dt>PCIEx8 Slots: <input type=number size=7 name=mobo_pcie8Slots placeholder="e.g. 0">
+                                        <dt>PCIEx4 Slots: <input type=number size=7 name=mobo_pcie4Slots placeholder="e.g. 0">
+                                        <dt>PCIEx1 Slots: <input type=number size=7 name=mobo_pcie1Slots placeholder="e.g. 2">
+                                        <dt>Chipset: <input type=text size=10 name=mobo_chipset placeholder="e.g. Intel X99">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - Fan                        -->
+                {% if partType == "fan" %}
+                        <li><b>Add Fan Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Fan Size: <input type=number size=7 name=fan_size placeholder="e.g. 120">mm
+                                        <dt>Fan Type: <input type=text size=7 name=fan_type placeholder="e.g. Radiator">
+                                        <dt>Fan Color: <input type=text size=7 name=fan_color placeholder="e.g. Red">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - LED Kit                        -->
+                {% if partType == "ledkit" %}
+                        <li><b>Add LED Kit Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Color: <input type=text size=7 name=ledkit_color placeholder="e.g. RGB">
+                                        <dt>Type: <input type=text size=15 name=ledkit_type placeholder="e.g. LED Magnetic Strip">
+                                        <dt>Notes: <textarea type=text rows=2 name=ledkit_notes placeholder="e.g. Comes with remote control">
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+                <!--    ADD PART - CPU                        -->
+                {% if partType == "cpu" %}
+                        <li><b>Add Processor Specifics</b>
+                        <form action="{{ url_for('add_part_details') }}" enctype=multipart/form-data method=post class=add-item>
+                                <input type=hidden name=pc_part_id value="{{ currentPart }}"></input>
+                                <input type=hidden name=part_type value="{{ partType }}"></input>
+                                <dl>
+                                        <dt>Socket: <input type=text size=7 name=cpu_socket placeholder="e.g. LGA2011v3">
+                                        <dt>Cores: <input type=number size=7 name=cpu_cores placeholder="e.g. 6">
+                                        <dt>Threads: <input type=number size=7 name=cpu_threads placeholder="e.g. 12">
+                                        <dt>Frequency: <input type=number size=7 name=cpu_frequency placeholder="e.g. 3.8"> GHz
+                                        <dt>L3 Cache: <input type=number size=7 name=cpu_cache placeholder="e.g. 12"> MB
+                                        <dt>Wattage: <input type=number size=7 name=cpu_wattage placeholder="e.g. 125"> Watts
+                                        <dd>
+                                        <dt>PC Build:
+                                        <dd><select name=pcBuild_id >
+                                        {% for pcBuild in pcBuildList %}
+                                                <option value="{{ pcBuild.pcBuild_id }}">{{ pcBuild.pcBuild_name }} , {{ pcBuild.pcBuild_type }} </option>
+                                        {% endfor %}
+                                            </select>
+                                        <dt>Add Part:
+                                        <dd><input type=submit value=Submit>
+                                </dl>
+                        </form>
+                {% endif %}
+        {% endif %}
+  <ul class=items>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

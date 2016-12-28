@@ -1,0 +1,31 @@
+INSERT INTO mobo 
+        (
+         mobo_ramType, 
+         mobo_CPUsocket,
+         mobo_dimmSlots,
+         mobo_pciSlots,
+         mobo_pcie8Slots,
+         mobo_pcie4Slots,
+         mobo_pcie1Slots,
+         mobo_chipset,
+         mobo_cpu4pin,
+         mobo_cpu8pin,
+         mobo_cpu6pin,
+         mobo_pcPart_id,
+         mobo_pcBuild_id
+         ) 
+        VALUES (
+                ?, 
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?
+                )
